@@ -2,11 +2,12 @@ import uuid
 from itertools import zip_longest
 from typing import Any, Iterable, List, Optional
 
+from steamship import File, Steamship, SteamshipError, Tag
+from steamship.data import TagKind, TagValueKey
+
 from langchain.docstore.document import Document
 from langchain.text_splitter import TextSplitter
 from langchain.vectorstores import VectorStore
-from steamship import File, Steamship, SteamshipError, Tag
-from steamship.data import TagKind, TagValueKey
 
 FAMILY_TO_DIMENSIONALITY = {"ada": 1024, "babbage": 2048, "curie": 4096, "davinci": 12288}
 

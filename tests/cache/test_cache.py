@@ -1,7 +1,7 @@
 import pytest
-from langchain.schema import Generation
 from steamship import Steamship
 
+from langchain.schema import Generation
 from steamship_langchain.cache import SteamshipCache
 
 TEST_PROMPT = "this is a test: "

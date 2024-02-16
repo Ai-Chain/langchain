@@ -1,7 +1,7 @@
 import pytest
-from langchain.memory import ConversationBufferMemory, ConversationBufferWindowMemory
 from steamship import Steamship
 
+from langchain.memory import ConversationBufferMemory, ConversationBufferWindowMemory
 from steamship_langchain.memory import ChatMessageHistory
 
 TEST_PROMPT = "this is a test: "

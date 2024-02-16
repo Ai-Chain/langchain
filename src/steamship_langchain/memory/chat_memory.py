@@ -1,10 +1,11 @@
 from datetime import datetime
 from typing import List, Optional
 
-from langchain.memory.chat_memory import ChatMessageHistory as BaseChatMessageHistory
-from langchain.schema import BaseMessage, HumanMessage
 from steamship import Block, File, Steamship, SteamshipError, Tag
 from steamship.data import TagKind
+
+from langchain.memory.chat_memory import ChatMessageHistory as BaseChatMessageHistory
+from langchain.schema import BaseMessage, HumanMessage
 
 
 def _timestamp_tag() -> Tag:

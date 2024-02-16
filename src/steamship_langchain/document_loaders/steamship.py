@@ -1,11 +1,12 @@
 """Get LangChain Documents from a set of persistent Steamship Files."""
 from typing import List, Optional
 
-from langchain.docstore.document import Document
-from langchain.document_loaders.base import BaseLoader
 from pydantic import BaseModel, validator
 from steamship import File, Steamship
 from steamship.data import TagKind, TagValueKey
+
+from langchain.docstore.document import Document
+from langchain.document_loaders.base import BaseLoader
 
 
 def _get_provenance_tag(file: File) -> Optional[str]:

@@ -1,12 +1,12 @@
 from typing import Any, Dict, List
 
+from steamship import File
+from steamship.invocable import PackageService, post
+
 import langchain
 from langchain import VectorDBQAWithSourcesChain
 from langchain.docstore.document import Document
 from langchain.text_splitter import CharacterTextSplitter
-from steamship import File
-from steamship.invocable import PackageService, post
-
 from steamship_langchain.cache import SteamshipCache
 from steamship_langchain.llms import OpenAI
 from steamship_langchain.vectorstores import SteamshipVectorStore

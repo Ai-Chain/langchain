@@ -1,11 +1,11 @@
 """Test ElasticSearch functionality."""
 
 import pytest
-from langchain.docstore.document import Document
-from langchain.text_splitter import CharacterTextSplitter
 from steamship import Block, File, Steamship, Tag
 from steamship.data import TagKind, TagValueKey
 
+from langchain.docstore.document import Document
+from langchain.text_splitter import CharacterTextSplitter
 from steamship_langchain.vectorstores import SteamshipVectorStore
 
 
