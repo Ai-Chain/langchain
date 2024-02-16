@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="2" time="58.019" timestamp="2024-02-16T09:15:23.312939" hostname="codespaces-74993e"><testcase classname="tests.test_python_splitter" name="test_python_splitter" time="0.001" /><testcase classname="tests.cache.test_cache" name="test_cache" time="7.615"><error message="failed on setup with &quot;RuntimeError: Could not update API key for test in /home/codespace/.steamship.json&quot;">@pytest.fixture()
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="2" failures="0" skipped="0" tests="3" time="29.143" timestamp="2024-02-16T09:33:13.243662" hostname="codespaces-74993e"><testcase classname="tests.test_python_splitter" name="test_python_splitter" time="0.002" /><testcase classname="tests.cache.test_cache" name="test_cache" time="11.556"><error message="failed on setup with &quot;RuntimeError: Could not update API key for test in /home/codespace/.steamship.json&quot;">@pytest.fixture()
     def client() -&gt; Steamship:
         """Returns a client rooted in a new workspace, then deletes that workspace afterwards.
     
@@ -16,16 +16,58 @@
 &gt;       steamship = get_steamship_client()
 
 tests/utils/fixtures.py:21: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 tests/utils/client.py:10: in get_steamship_client
     fail_if_workspace_exists=fail_if_workspace_exists, config=Configuration.parse_obj(kwargs)
 pydantic/main.py:526: in pydantic.main.BaseModel.parse_obj
     ???
 .venv/lib/python3.8/site-packages/steamship/base/configuration.py:74: in __init__
     Configuration._save_api_key_to_file(
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-new_api_key = '87FE2D29-6D89-480F-813D-4B7EB886D2E7', profile = 'test', file_path = PosixPath('/home/codespace/.steamship.json')
+new_api_key = '87FE2D29-6D89-480F-813D-4B7EB886D2E7', profile = 'test'
+file_path = PosixPath('/home/codespace/.steamship.json')
+
+    @staticmethod
+    def _save_api_key_to_file(new_api_key: Optional[str], profile: Optional[str], file_path: Path):
+        # Minimally rewrite config file, adding api key
+        try:
+            with file_path.open() as f:
+                config_file = json.load(f)
+            if profile:
+                if "profiles" not in config_file or profile not in config_file["profiles"]:
+&gt;                   raise RuntimeError(f"Could not update API key for {profile} in {file_path}")
+E                   RuntimeError: Could not update API key for test in /home/codespace/.steamship.json
+
+.venv/lib/python3.8/site-packages/steamship/base/configuration.py:120: RuntimeError</error></testcase><testcase classname="tests.document_loaders.test_steamship" name="test_steamship_loader_files" time="10.412"><error message="failed on setup with &quot;RuntimeError: Could not update API key for test in /home/codespace/.steamship.json&quot;">@pytest.fixture()
+    def client() -&gt; Steamship:
+        """Returns a client rooted in a new workspace, then deletes that workspace afterwards.
+    
+        To use, simply import this file and then write a test which takes `client`
+        as an argument.
+    
+        Example
+        -------
+        The client can be used by injecting a fixture as follows::
+    
+            @pytest.mark.usefixtures("client")
+            def test_something(client):
+              pass
+        """
+&gt;       steamship = get_steamship_client()
+
+tests/utils/fixtures.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/utils/client.py:10: in get_steamship_client
+    fail_if_workspace_exists=fail_if_workspace_exists, config=Configuration.parse_obj(kwargs)
+pydantic/main.py:526: in pydantic.main.BaseModel.parse_obj
+    ???
+.venv/lib/python3.8/site-packages/steamship/base/configuration.py:74: in __init__
+    Configuration._save_api_key_to_file(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+new_api_key = '87FE2D29-6D89-480F-813D-4B7EB886D2E7', profile = 'test'
+file_path = PosixPath('/home/codespace/.steamship.json')
 
     @staticmethod
     def _save_api_key_to_file(new_api_key: Optional[str], profile: Optional[str], file_path: Path):
