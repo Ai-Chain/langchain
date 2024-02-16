@@ -12,6 +12,7 @@ name: Upload Python Package
 #  release:
 #    types: [published]
 on:
+  workflow_dispatch:
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+*'
